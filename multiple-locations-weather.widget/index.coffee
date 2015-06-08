@@ -27,6 +27,18 @@ locations:
     country: "España"
     lat: 39.470239
     lng: -0.376805
+  ham:
+    name: "Hamburg, DEU"
+    lat: 53.5538148
+    lng: 9.9915752
+  bcn:
+    name: "Barcelona, ESP"
+    lat: 41.387917
+    lng: 2.169919
+  gij:
+    name: "Gijón, ESP"
+    lat: 43.5452608
+    lng: -5.6619264
 
 
 exclude: "minutely,hourly,alerts,flags"
@@ -55,32 +67,39 @@ style: """
       width: 40px
       position: relative
       top: 15px
-      left: -5px
+      left: 5px
   @css {
     span, div {
-      font: 100 11px/1 'Consolas', sans-serif;
+      font: 100 11px/1 'Helvetica Neue', sans-serif;
     }
     #content {
       border-radius: 10px;
-      padding: 5px;
+      padding-left: 10px;
+      padding-top: 5px;
+      padding-right: 10px;
+      padding-bottom: 20px;
     }
     #content.white {
       color: #fff;
       background-color: rgba(255,255,255,0.025);
-      border: 1px solid #ffffff;
+      border: 1px solid rgba(255,255,255,0.5);
     }
     #content.black {
       color: #000;
       background-color: rgba(0,0,0,0.025);
-      border: 1px solid #000000;
+      border: 1px solid rgba(0,0,0,0.5);
     }
     div.location {
-      margin-top: -15px;
+      margin-top: -5px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255, 0.5);
     }
     span.name {
-      width: 90px;
+      width: 130px;
       overflow: hidden;
       text-overflow: ellipsis;
+      font-weight: 600;
+      font-size: 14px;
     }
     span.rain {
       margin-left: 10px;
