@@ -7,6 +7,9 @@ apiKey: ""
 # Choose the color theme to use. Available themes are 'white' and 'black'.
 theme: 'white'
 
+# Choose degree units; 'c' for celsius, 'f' for fahrenheit
+unit: 'c'
+
 ###
   Object of locations to display. Maximum recommended 5, but changing the refresh frequency more can be added.
   Each location will have an ID, a name, a latitude and a longitude.
@@ -221,6 +224,7 @@ update: (o, dom) ->
   apiKey = @apiKey
   exclude = @exclude
   theme = @theme
+  unit = @unit
   widgetName = @widgetName
   days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   $.each @locations, (id, location) ->
@@ -240,15 +244,24 @@ update: (o, dom) ->
         r = data.currently.precipProbability
         $(dom).find('#' + id + ' .name').text(location.name)
         $(dom).find('#' + id + ' .icon').html('<img src="' + widgetName + '.widget/icon/' + theme + '/' + s1 + '.png"></img>')
+
         $(dom).find('#' + id + ' .temperature b').text(Math.round(t) + ' °C')
+        if unit == 'f'
+          $(dom).find('#' + id + ' .temperature b').text(Math.round(t * 9 / 5 + 32) + ' °F')
+
         $(dom).find('#' + id + ' .rain b').text(Math.round(r * 100) + '%')
         $.each data.daily.data, (idx, day) ->
           xx = new Date()
           xx.setTime(day.time*1000)
           $(dom).find('#' + id + '-plus-' + (idx + 1) + ' .day-name').text(days[xx.getDay()])
           $(dom).find('#' + id + '-plus-' + (idx + 1) + ' .rain-prob').text(Math.round(day.precipProbability * 100) + '%')
+
           $(dom).find('#' + id + '-plus-' + (idx + 1) + ' .max-temp').text(Math.round(day.apparentTemperatureMax))
           $(dom).find('#' + id + '-plus-' + (idx + 1) + ' .min-temp').text(Math.round(day.apparentTemperatureMin))
+          if unit == 'f'
+            $(dom).find('#' + id + '-plus-' + (idx + 1) + ' .max-temp').text(Math.round(day.apparentTemperatureMax * 9 / 5 + 32))
+            $(dom).find('#' + id + '-plus-' + (idx + 1) + ' .min-temp').text(Math.round(day.apparentTemperatureMin * 9 / 5 + 32))
+
           s2 = day.icon
           s2 = s2.replace(/-/g, "_")
           $(dom).find('#' + id + '-plus-' + (idx + 1) + ' .day-icon').html('<img src="' + widgetName + '.widget/icon/' + theme + '/' + s2 + '.png"></img>')
