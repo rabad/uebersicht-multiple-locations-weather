@@ -25,6 +25,8 @@ where `lnd` is the location id to be used when building the HTML.
 
  * `theme` -- currently available themes are `black` and `white`.
 
+ * `unit` -- degree units; `c` for celsius, `f` for fahrenheit
+
  * `refreshFrequency` -- Refresh interval. [Forecast.io](https://developer.forecast.io/) allows to make a maximum of 1000 free queries/day. Number of queries will depend on number of locations and refresh frequency.
 
 Icons designed by [Adam Whitcroft](http://adamwhitcroft.com/climacons/).
